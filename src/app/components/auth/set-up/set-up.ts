@@ -4,11 +4,13 @@ import { inject } from '@angular/core';
 import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-set-up',
   imports: [
     FormsModule,
+    NgIf
   ],
   templateUrl: './set-up.html',
   styleUrl: './set-up.sass'
@@ -19,7 +21,6 @@ export class SetUpComponent {
   private router = inject(Router);
 
   displayName = '';
-  phoneNumber = '';
   errorMessage = '';
 
   async saveProfile() {
@@ -33,7 +34,6 @@ export class SetUpComponent {
       const userRef = doc(this.firestore, `users/${user.uid}`);
       await updateDoc(userRef, {
         displayName: this.displayName,
-        phoneNumber: this.phoneNumber || null,
         setupComplete: true
       });
       this.router.navigate(['/family']);

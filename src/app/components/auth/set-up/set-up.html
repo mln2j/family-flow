@@ -2,7 +2,6 @@
   <h2>Postavljanje profila</h2>
   <form (ngSubmit)="saveProfile()" #profileForm="ngForm" novalidate>
     <input type="text" name="displayName" [(ngModel)]="displayName" placeholder="Ime i prezime" required />
-    <input type="text" name="phoneNumber" [(ngModel)]="phoneNumber" placeholder="Telefon (opcionalno)" />
     <button [disabled]="profileForm.invalid" type="submit">Spremi</button>
   </form>
   <div *ngIf="errorMessage" style="color:red">{{ errorMessage }}</div>
