@@ -2,9 +2,11 @@
   <h2>Moje obitelji</h2>
 
   <ul *ngIf="families$ | async as families; else noFamilies">
-    <li *ngFor="let family of families">
-      <strong>{{ family.name }}</strong> ({{ family.members.length }} članova)
-    </li>
+    <ng-container *ngIf="families.length > 0; else noFamilies">
+      <li *ngFor="let family of families">
+        <strong>{{ family.name }}</strong> ({{ family.members.length }} članova)
+      </li>
+    </ng-container>
   </ul>
 
   <ng-template #noFamilies>
