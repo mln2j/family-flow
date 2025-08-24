@@ -6,13 +6,13 @@ import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-set-up',
+  selector: 'app-setup',
   imports: [
     FormsModule,
     NgIf
   ],
-  templateUrl: './set-up.html',
-  styleUrl: './set-up.sass'
+  templateUrl: './setup.html',
+  styleUrl: './setup.sass'
 })
 export class SetUpComponent implements OnInit {
   private firestore = inject(Firestore);

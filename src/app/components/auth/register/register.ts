@@ -38,7 +38,7 @@ export class RegisterComponent {
         createdAt: new Date()
       });
 
-      this.router.navigate(['/set-up']);
+      this.router.navigate(['/setup']);
     } catch (error: any) {
       this.errorMessage = error.message || 'Došlo je do pogreške prilikom registracije.';
     }

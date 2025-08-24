@@ -37,10 +37,10 @@ export class LoginComponent implements OnInit {
         if (userData.setupComplete) {
           this.router.navigate(['']);
         } else {
-          this.router.navigate(['/set-up']);
+          this.router.navigate(['/setup']);
         }
       } else {
-        this.router.navigate(['/set-up']);
+        this.router.navigate(['/setup']);
       }
     }
   }
@@ -60,10 +60,10 @@ export class LoginComponent implements OnInit {
         if (userData.setupComplete) {
           this.router.navigate(['']);
         } else {
-          this.router.navigate(['/set-up']);
+          this.router.navigate(['/setup']);
         }
       } else {
-        this.router.navigate(['/set-up']);
+        this.router.navigate(['/setup']);
       }
 
     } catch (error: any) {
