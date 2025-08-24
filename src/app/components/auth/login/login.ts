@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { Router , RouterModule} from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +16,7 @@ import { Firestore, doc, getDoc } from '@angular/fire/firestore';
   templateUrl: './login.html',
   styleUrls: ['./login.sass']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   private firestore = inject(Firestore);
   private auth = inject(Auth);
   private router = inject(Router);
@@ -24,6 +24,26 @@ export class LoginComponent {
   email = '';
   password = '';
   errorMessage = '';
+
+  async ngOnInit() {
+    const currentUser = this.auth.currentUser;
+    if (currentUser) {
+      const userDocRef = doc(this.firestore, `users/${currentUser.uid}`);
+      const userDocSnap = await getDoc(userDocRef);
+
+      if (userDocSnap.exists()) {
+        const userData = userDocSnap.data() as { setupComplete?: boolean };
+
+        if (userData.setupComplete) {
+          this.router.navigate(['']);
+        } else {
+          this.router.navigate(['/set-up']);
+        }
+      } else {
+        this.router.navigate(['/set-up']);
+      }
+    }
+  }
 
   async login() {
     this.errorMessage = '';
