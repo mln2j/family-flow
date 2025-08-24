@@ -1,0 +1,13 @@
+<section class="family-container">
+  <h2>Moje obitelji</h2>
+
+  <ul *ngIf="families$ | async as families; else noFamilies">
+    <li *ngFor="let family of families">
+      <strong>{{ family.name }}</strong> ({{ family.members.length }} članova)
+    </li>
+  </ul>
+
+  <ng-template #noFamilies>
+    <p>Niste član nijedne obitelji.</p>
+  </ng-template>
+</section>
