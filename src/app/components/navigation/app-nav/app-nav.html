@@ -1,0 +1,7 @@
+<nav>
+  <a routerLink="/family" *ngIf="user$ | async as user">Family</a>
+  <a routerLink="/login" *ngIf="!(user$ | async)">Login</a>
+  <a routerLink="/register" *ngIf="!(user$ | async)">Register</a>
+  <button (click)="logout()" *ngIf="user$ | async">Logout</button>
+  <span *ngIf="user$ | async as user">Dobrodošli, {{ user.email }}</span>
+</nav>
