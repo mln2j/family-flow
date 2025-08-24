@@ -4,11 +4,16 @@ import { Auth, authState } from '@angular/fire/auth';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Family as FamilyModel } from '../../../models/family.model';
+import {AsyncPipe, NgFor, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-family',
   standalone: true,
-  imports: [],
+  imports: [
+    AsyncPipe,
+    NgIf,
+    NgFor
+  ],
   templateUrl: './family.html',
   styleUrls: ['./family.sass'],
 })
