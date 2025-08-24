@@ -6,4 +6,5 @@ export interface Transaction {
   type: 'income' | 'expense';
   date: Date;
   description: string;
+  group?: string;
 }
