@@ -1,0 +1,26 @@
+<div class="register-container">
+  <h2>Registracija</h2>
+  <form (ngSubmit)="register()" #registerForm="ngForm" novalidate >
+    <input
+      type="email"
+      [(ngModel)]="email"
+      name="email"
+      placeholder="Email"
+      required
+      email
+      #emailCtrl="ngModel"
+    />
+    <div *ngIf="emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)" style="color: red;">
+      <small *ngIf="emailCtrl.errors?.['required']">Email je obavezan.</small>
+      <small *ngIf="emailCtrl.errors?.['email']">Unesite ispravan email.</small>
+    </div>
+
+    <input type="password" [(ngModel)]="password" name="password" placeholder="Lozinka" required />
+    <button [disabled]="registerForm.invalid" type="submit">Registriraj se</button>
+  </form>
+  <div *ngIf="errorMessage" style="color:red">{{ errorMessage }}</div>
+  <p>Već imate račun? <a routerLink="/login">Prijavi se</a></p>
+</div>
+
+
+
