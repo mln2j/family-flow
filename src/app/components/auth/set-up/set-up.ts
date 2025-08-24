@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { inject } from '@angular/core';
-import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
+import { Firestore, doc, getDoc, updateDoc } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import {NgIf} from '@angular/common';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-set-up',
@@ -15,13 +14,25 @@ import {NgIf} from '@angular/common';
   templateUrl: './set-up.html',
   styleUrl: './set-up.sass'
 })
-export class SetUpComponent {
+export class SetUpComponent implements OnInit {
   private firestore = inject(Firestore);
   private auth = inject(Auth);
   private router = inject(Router);
 
   displayName = '';
   errorMessage = '';
+
+  async ngOnInit() {
+    const user = this.auth.currentUser;
+    const userRef = doc(this.firestore, `users/${user!.uid}`);
+    const userSnap = await getDoc(userRef);
+    if (userSnap.exists()) {
+      const data = userSnap.data() as { setupComplete?: boolean };
+      if (data.setupComplete) {
+        this.router.navigate(['']);
+      }
+    }
+  }
 
   async saveProfile() {
     this.errorMessage = '';
