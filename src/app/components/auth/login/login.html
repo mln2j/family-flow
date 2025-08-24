@@ -1,0 +1,9 @@
+<div class="login-container">
+  <h2>Prijava</h2>
+  <form (ngSubmit)="login()" #loginForm="ngForm" novalidate>
+    <input type="email" name="email" [(ngModel)]="email" required placeholder="Email" />
+    <input type="password" name="password" [(ngModel)]="password" required placeholder="Lozinka" />
+    <button [disabled]="loginForm.invalid" type="submit">Prijavi se</button>
+  </form>
+  <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+</div>
