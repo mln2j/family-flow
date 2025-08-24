@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, collection, doc, collectionData, docData, addDoc, updateDoc, deleteDoc } from '@angular/fire/firestore';
+import { Firestore, collection, doc, collectionData, docData, addDoc, updateDoc, deleteDoc, query, where } from '@angular/fire/firestore';
 import { Family } from '../models/family.model';
 import { Observable } from 'rxjs';
 
@@ -11,6 +11,11 @@ export class FamilyService {
   getFamilyById(id: string): Observable<Family> {
     const familyDoc = doc(this.firestore, `families/${id}`);
     return docData(familyDoc, { idField: 'id' }) as Observable<Family>;
+  }
+
+  getFamiliesByUserId(userId: string): Observable<Family[]> {
+    const q = query(this.familiesCollection, where('members', 'array-contains', userId));
+    return collectionData(q, { idField: 'id' }) as Observable<Family[]>;
   }
 
   getAllFamilies(): Observable<Family[]> {
