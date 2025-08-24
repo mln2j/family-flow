@@ -6,4 +6,5 @@
     <button [disabled]="loginForm.invalid" type="submit">Prijavi se</button>
   </form>
   <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+  <p>Nemate račun? <a routerLink="/register">Registriraj se</a></p>
 </div>
