@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Family as FamilyModel } from '../../../models/family.model';
 import {AsyncPipe, NgFor, NgIf} from '@angular/common';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-family',
@@ -12,7 +13,8 @@ import {AsyncPipe, NgFor, NgIf} from '@angular/common';
   imports: [
     AsyncPipe,
     NgIf,
-    NgFor
+    NgFor,
+    RouterLink
   ],
   templateUrl: './family.html',
   styleUrls: ['./family.sass'],

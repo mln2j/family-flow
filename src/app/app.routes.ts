@@ -5,6 +5,7 @@ import { LoginComponent } from './components/auth/login/login';
 import { FamilyComponent } from './components/dashboard/family/family';
 import {RegisterComponent} from './components/auth/register/register';
 import {SetUpComponent} from './components/auth/setup/setup';
+import {CreateFamilyComponent} from './components/dashboard/create-family/create-family';
 
 
 export const routes: Routes = [
@@ -12,6 +13,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent, canActivate: [noAuthGuard] },
   { path: 'family', component: FamilyComponent, canActivate: [authGuard] },
   { path: 'setup', component: SetUpComponent, canActivate: [authGuard] },
+  { path: 'create-family', component: CreateFamilyComponent, canActivate: [authGuard] },
   { path: '', redirectTo: 'family', pathMatch: 'full' },
   { path: '**', redirectTo: 'family' }
 ];

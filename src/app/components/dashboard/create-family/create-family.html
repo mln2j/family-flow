@@ -1,0 +1,8 @@
+<div class="create-family-container">
+  <h2>Kreiraj obitelj</h2>
+  <form (ngSubmit)="createFamily()" #familyForm="ngForm">
+    <input name="familyName" [(ngModel)]="familyName" placeholder="Ime obitelji" required minlength="3" />
+    <button type="submit" [disabled]="familyForm.invalid">Kreiraj</button>
+  </form>
+  <div *ngIf="errorMessage" style="color:red">{{ errorMessage }}</div>
+</div>
