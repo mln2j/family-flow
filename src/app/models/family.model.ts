@@ -4,5 +4,6 @@ export interface Family {
   ownerId: string;
   admins: string[];
   members: string[];
+  joinRequests: string[];
   createdAt: Date;
 }

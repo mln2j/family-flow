@@ -1,0 +1,58 @@
+<div *ngIf="family$ | async as family">
+  <div *ngIf="!isEditingName && canManageRequests">
+    <h2>
+      {{ editableFamilyName }}
+      <button (click)="startEditingName()">Promijeni ime</button>
+    </h2>
+  </div>
+
+  <div *ngIf="isEditingName">
+    <input [(ngModel)]="editableFamilyName" />
+    <button (click)="saveFamilyName()">Spremi</button>
+    <button (click)="cancelEditingName()">Odustani</button>
+  </div>
+
+  <!-- Ako korisnik nema pravo uređivanja, samo prikaži naslov -->
+  <h2 *ngIf="!canManageRequests && !isEditingName">{{ editableFamilyName }}</h2>
+
+
+  <h3>Članovi:</h3>
+  <ul>
+    <li *ngFor="let member of membersData">
+      {{ member.displayName }}
+
+      <button *ngIf="canManageRequests && !family.admins.includes(member.uid)"
+              (click)="promoteToAdmin(member.uid, family)">
+        Promoviraj u admina
+      </button>
+
+      <button *ngIf="canManageRequests && member.uid !== family.ownerId"
+              (click)="removeMember(member.uid, family)">
+        Izbaci
+      </button>
+
+      <button *ngIf="canManageRequests && member.uid !== family.ownerId"
+              (click)="transferOwnership(member.uid, family)">
+        Dodijeli vlasništvo
+      </button>
+    </li>
+  </ul>
+
+
+
+  <div *ngIf="canManageRequests && joinRequestsData.length > 0">
+    <h3>Zahtjevi za pridruživanje:</h3>
+    <ul>
+      <li *ngFor="let user of joinRequestsData">
+        {{ user.displayName }}
+        <button (click)="acceptJoinRequest(user.uid)">Prihvati</button>
+        <button (click)="rejectJoinRequest(user.uid)">Odbij</button>
+      </li>
+    </ul>
+  </div>
+
+  <button *ngIf="!family.members.includes(currentUserId) && !(family.joinRequests || []).includes(currentUserId)"
+          (click)="sendJoinRequest()">
+    Pošalji zahtjev za pridruživanje
+  </button>
+</div>

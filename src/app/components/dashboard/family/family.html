@@ -4,7 +4,7 @@
   <ul *ngIf="families$ | async as families; else noFamilies">
     <ng-container *ngIf="families.length > 0; else noFamilies">
       <li *ngFor="let family of families">
-        <strong>{{ family.name }}</strong> ({{ family.members.length }} članova)
+        <a [routerLink]="['/family', family.id]">{{ family.name }}</a> ({{ family.members.length }} članova)
       </li>
     </ng-container>
   </ul>
